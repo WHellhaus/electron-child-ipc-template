@@ -1,3 +1,27 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+// Expose protected methods that allow the renderer process to use
+// the ipcRenderer without exposing the entire object
+contextBridge.exposeInMainWorld(
+  "api", {
+      send: (channel, data) => {
+          // whitelist channels
+          let validChannels = ["runDolphin"];
+          if (validChannels.includes(channel)) {
+              ipcRenderer.send(channel, data);
+          }
+      },
+      receive: (channel, func) => {
+          let validChannels = [];
+          if (validChannels.includes(channel)) {
+              // Deliberately strip event as it includes `sender` 
+              ipcRenderer.on(channel, (event, ...args) => func(...args));
+          }
+      }
+  }
+);
+
+// ↓↓↓ FROM electron-quick-start REPO (can be deleted) ↓↓↓
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
