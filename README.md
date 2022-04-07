@@ -1,6 +1,6 @@
 # Electron Dolphin Launcher
 
-Clone of `electron-quick-start` for launching Dolphin process. Uses ipcMain to send messages from renderer process to main and open file. Can be used as template for 
+Clone of `electron-quick-start` for launching Dolphin process. Uses ipcMain to send messages from renderer process to main and open application. Can be used as template for launcher 
 
 
 ## To Use
