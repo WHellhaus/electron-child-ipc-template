@@ -1,3 +1,11 @@
 /* styles.css */
+body {
+    background-color: rgb(64, 64, 64);
+    color: whitesmoke;
+}
 
+button {
+    background-color: rgb(78, 238, 183);
+    color: white;
+}
 /* Add styles here to customize the appearance of your app */

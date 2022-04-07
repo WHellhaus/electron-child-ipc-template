@@ -2,12 +2,10 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const fs = require('fs');
+const { run_script } = require('./utils');
 
-import { run_script } from './utils';
-
-const data = fs.readFileSync(pathToSettingsJSON);
+const data = fs.readFileSync("config.json");
 const json = data.toString('utf8');
-console.log(`settings JSON: ${json}`);
 const settings = JSON.parse(json);
 
 function createWindow () {
@@ -48,7 +46,8 @@ app.on('window-all-closed', function () {
 })
 
 ipcMain.on("runDolphin", (event, args) => {
-  run_script(`start ${settings["PATH_TO_DOLPHIN"]}`)
+  console.log(settings)
+  run_script(`${settings["PATH_TO_DOLPHIN"]}`);
 })
 
 // In this file you can include the rest of your app's specific main process
